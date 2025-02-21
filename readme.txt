@@ -9,7 +9,7 @@ This is a **Job Recommendation System** built using **Django** for the backend a
 
 ### **1. Clone the Repository**
 ```bash
- git clone <repository_url>
+ git clone https://github.com/rajanpatel040504/Job-Recommendation-System/tree/main
  cd job_recommendation_system
 ```
 
