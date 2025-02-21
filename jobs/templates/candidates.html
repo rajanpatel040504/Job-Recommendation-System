@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recommendations</title>
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <style>
+        .candidate-card {
+            position: relative;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            margin: 10px;
+            padding: 20px;
+        }
+        .card-ids {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong><a href="{% url 'welcome' %}">Placement Guide</a></strong></li>
+        </ul>
+        <ul>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+            <li><a href="#about-us">About</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <hgroup>
+            <h1>Eligible Candidates</h1>
+            <h3>Here are the candidates that match your job requirements.</h3>
+        </hgroup>
+        <br>
+
+        <div class="grid">
+            {% for candidate in candidates_info %}
+                <div class="candidate-card">
+                    <div class="card-ids">
+                        <p><strong>User ID:</strong> {{ candidate.0 }}</p>
+                        <p><strong>Job ID:</strong> {{ candidate.6 }}</p>
+                    </div>
+                    <h4>{{ candidate.1 }}</h4> <!-- Name -->
+                    <p><strong>Email:</strong> {{ candidate.2 }}</p>
+                    <p><strong>Job Title:</strong> {{ candidate.4 }}</p>
+                    <p><strong>Experience:</strong> {{ candidate.3 }} years</p>
+                    <p><strong>Skills:</strong> {{ candidate.5 }}</p>
+                </div>
+            {% empty %}
+                <h5>No candidates found.</h5>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

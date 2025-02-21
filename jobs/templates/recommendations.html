@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recommendations</title>
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <style>
+        .candidate-card {
+            position: relative;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            margin: 10px;
+            padding: 20px;
+        }
+        .card-ids {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong><a href="{% url 'welcome' %}">Placement Guide</a></strong></li>
+        </ul>
+        <ul>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+            <li><a href="#about-us">About</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <hgroup>
+            <h1>Job Recommendations</h1>
+            <h3>Here are the recommended jobs based on your job title, experience, and skills.</h3>
+        </hgroup><br>
+        <div class="grid">
+            <section>
+                {% if recommendations %}
+                    {% if recommendations.0.message %}
+                        <h5>{{ recommendations.0.message }}</h5>
+                    {% else %}
+                        <div class="row">
+                            {% for job in recommendations %}
+                                <div class="col-md-6 mb-4">
+                                    <div class="candidate-card">
+                                        <div class="card-ids">
+                                            <p><strong>Company ID:</strong> {{ job.company_id }}</p>
+                                            <p><strong>Job ID:</strong> {{ job.job_id }}</p>
+                                        </div>
+                                        <h4>{{ job.Company }}</h4>
+                                        <p><strong>Job Title:</strong> {{ job.Job_Title }}</p>
+                                        <p><strong>Salary:</strong> {{ job.Job_Salary }}</p>
+                                        <p><strong>Experience Required:</strong> {{ job.Job_Experience }}</p>
+                                        <p><strong>Skills Required:</strong> {{ job.Key_Skills }}</p>
+                                        <p><strong>Industry:</strong> {{ job.Industry }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <h5>No job recommendations available at the moment.</h5>
+                {% endif %}
+            </section>
+        </div>
+    </main>
+</body>
+</html>
