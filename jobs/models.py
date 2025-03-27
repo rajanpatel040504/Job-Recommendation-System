@@ -24,6 +24,9 @@ class Company(models.Model):
     domain = models.CharField(max_length=255)
     company_pwd = models.CharField(max_length=255)
 
+    class Meta:
+        db_table = 'companies' 
+
 class Recommendation(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     job_id = models.IntegerField()
